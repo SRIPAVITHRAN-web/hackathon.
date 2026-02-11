@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SmartKisan</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="navbar">
+    <h1 id="titleText">AI Crop Disease Detection</h1>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="upload.html">Upload</a>
+      <a href="chatbot.html">Chatbot</a>
+      <select id="languageSelect" onchange="changeLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="ta">தமிழ்</option>
+        <option value="hi">हिन्दी</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2 id="chatTitle">Ask the AI Farming Assistant</h2>
+
+    <div id="chatBox" style="height: 260px; overflow-y: auto; border: 1px solid #cfd8dc; padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+      <div><strong>AI:</strong> Hello! Ask me about crop diseases, fertilizers, or best practices.</div>
+    </div>
+
+    <input type="text" id="userInput" placeholder="Type your question..." />
+    <button class="btn" onclick="sendMessage()" id="sendBtn">Send</button>
+  </div>
+
+  <script>
+    const responses = {
+      en: {
+        greeting: "Hello! Ask me about crop diseases, fertilizers, or best practices.",
+        disease: "Common crop diseases can be reduced by proper spacing, timely irrigation, and recommended fungicides.",
+        fertilizer: "Use balanced fertilizers based on soil testing for best yield.",
+        water: "Avoid overwatering; water early morning or evening.",
+        fallback: "I am still learning. Please consult a local agriculture officer for exact advice."
+      },
+      ta: {
+        greeting: "வணக்கம்! பயிர் நோய்கள், உரங்கள் மற்றும் நல்ல நடைமுறைகள் குறித்து கேளுங்கள்.",
+        disease: "சரியான இடைவெளி மற்றும் உரிய பூச்சிக்கொல்லி பயன்படுத்துவதால் நோய்களை குறைக்கலாம்.",
+        fertilizer: "மண்ணின் பரிசோதனைக்கு ஏற்ப சமநிலை உரங்களை பயன்படுத்தவும்.",
+        water: "அதிகமாக தண்ணீர் ஊற்ற வேண்டாம்; காலை அல்லது மாலை நேரத்தில் நீர் ஊற்றவும்.",
+        fallback: "நான் இன்னும் கற்றுக்கொண்டு இருக்கிறேன். உள்ளூர் வேளாண் அதிகாரியை அணுகவும்."
+      },
+      hi: {
+        greeting: "नमस्ते! फसल रोग, उर्वरक और अच्छी खेती विधियों के बारे में पूछें।",
+        disease: "सही दूरी और अनुशंसित फफूंदनाशक से रोग कम किए जा सकते हैं।",
+        fertilizer: "मिट्टी परीक्षण के आधार पर संतुलित उर्वरक का उपयोग करें।",
+        water: "अधिक पानी न दें; सुबह या शाम को सिंचाई करें।",
+        fallback: "मैं अभी सीख रहा हूँ। कृपया कृषि अधिकारी से सलाह लें।"
+      }
+    };
+
+    function changeLanguage(lang) {
+      localStorage.setItem("lang", lang);
+      applyLanguage(lang);
+    }
+
+    function applyLanguage(lang) {
+      const t = responses[lang];
+      document.getElementById("titleText").innerText =
+        lang === "ta" ? "ஏஐ பயிர் நோய் கண்டறிதல்" :
+        lang === "hi" ? "एआई फसल रोग पहचान" :
+        "AI Crop Disease Detection";
+
+      document.getElementById("chatTitle").innerText =
+        lang === "ta" ? "ஏஐ விவசாய உதவியாளர்" :
+        lang === "hi" ? "एआई कृषि सहायक" :
+        "Ask the AI Farming Assistant";
+
+      document.getElementById("sendBtn").innerText =
+        lang === "ta" ? "அனுப்பு" :
+        lang === "hi" ? "भेजें" :
+        "Send";
+
+      const chatBox = document.getElementById("chatBox");
+      chatBox.innerHTML = `<div><strong>AI:</strong> ${t.greeting}</div>`;
+    }
+
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const msg = input.value.trim().toLowerCase();
+      if (!msg) return;
+
+      const lang = localStorage.getItem("lang") || "en";
+      const t = responses[lang];
+
+      const chatBox = document.getElementById("chatBox");
+      chatBox.innerHTML += `<div><strong>You:</strong> ${input.value}</div>`;
+
+      let reply = t.fallback;
+      if (msg.includes("disease") || msg.includes("நோய்") || msg.includes("रोग")) reply = t.disease;
+      else if (msg.includes("fertilizer") || msg.includes("உரம்") || msg.includes("उर्वरक")) reply = t.fertilizer;
+      else if (msg.includes("water") || msg.includes("தண்ணீர்") || msg.includes("पानी")) reply = t.water;
+
+      setTimeout(() => {
+        chatBox.innerHTML += `<div><strong>AI:</strong> ${reply}</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }, 400);
+
+      input.value = "";
+    }
+
+    const savedLang = localStorage.getItem("lang") || "en";
+    document.getElementById("languageSelect").value = savedLang;
+    applyLanguage(savedLang);
+  </script>
+</body>
+</html>

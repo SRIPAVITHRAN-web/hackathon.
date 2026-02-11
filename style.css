@@ -1,0 +1,309 @@
+/* =========================
+   GLOBAL THEME
+========================= */
+:root {
+  --green-900: #0f3d2e;
+  --green-700: #1b5e20;
+  --green-500: #2e7d32;
+  --green-300: #66bb6a;
+  --bg-1: #ecf4ee;
+  --bg-2: #d9f9e4;
+  --card: #eff8f1;
+  --text-1: #102a1f;
+  --text-2: #46695a;
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --shadow-soft: 0 12px 28px rgba(0, 0, 0, 0.12);
+  --shadow-light: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   RESET & BASE
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: lineargradient(180deg,#2e7d32,#7bd380);
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  color: var(--text-1);
+  background: radial-gradient(circle at top, #ffffff 0%, var(--bg-1) 45%, var(--bg-2) 100%);
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, var(--green-700), var(--green-500));
+  color: #fff;
+  box-shadow: var(--shadow-light);
+}
+
+.navbar h1 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.navbar .links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.navbar a {
+  color: #ecfff0;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 999px;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.navbar a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.navbar select {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: none;
+  outline: none;
+  font-weight: 600;
+  cursor: pointer;
+
+}
+
+/* =========================
+   HERO (HOME)
+========================= */
+.hero {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  
+}
+
+.hero-card {
+  max-width: 760px;
+  width: 100%;
+  background: linear-gradient(#f7fff9);
+  border-radius: var(--radius-lg);
+  padding: 56px 40px;
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-card::after {
+  content: "";
+  position: absolute;
+  inset: auto -40% -60% -40%;
+  height: 140%;
+  background: radial-gradient(circle at center, rgba(102, 187, 106, 0.25), transparent 60%);
+  pointer-events: none;
+}
+
+.hero h2 {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.hero p {
+  max-width: 680px;
+  margin: 0 auto 28px;
+  font-size: 17px;
+  color: var(--text-2);
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 28px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(135deg, var(--green-700), var(--green-500));
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  box-shadow: 0 10px 20px rgba(27, 94, 32, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 16px 28px rgba(27, 94, 32, 0.45);
+  filter: brightness(1.05);
+}
+
+/* =========================
+   CARDS / CONTAINERS
+========================= */
+.container {
+  max-width: 520px;
+  margin: 64px auto;
+  padding: 34px 28px 36px;
+  background: linear-gradient(180deg, #ffffff, #f8fffa);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+/* =========================
+   FORMS & INPUTS
+========================= */
+label {
+  display: block;
+  font-weight: 600;
+  margin: 10px 0 6px;
+}
+
+input[type="file"],
+input[type="text"],
+select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  background: #fff;
+  transition: border 0.15s ease, box-shadow 0.15s ease;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--green-500);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.25);
+}
+
+/* =========================
+   RESULT / ALERT BOX
+========================= */
+.result-box {
+  margin-top: 18px;
+  padding: 18px 18px 16px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(180deg, #f1f8e9, #e6f4ea);
+  border-left: 5px solid var(--green-500);
+  color: #1b3b2a;
+  animation: fadeUp 0.25s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#loading {
+  margin-top: 12px;
+  font-weight: 600;
+  color: var(--green-700);
+}
+
+/* =========================
+   CHATBOT
+========================= */
+.chat-container {
+  max-width: 560px;
+  margin: 60px auto;
+  background: linear-gradient(180deg, #ffffff, #f8fffa);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header {
+  padding: 14px 18px;
+  background: linear-gradient(135deg, var(--green-700), var(--green-500));
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+}
+
+.chat-box {
+  flex: 1;
+  padding: 14px 12px;
+  overflow-y: auto;
+  background: radial-gradient(circle at top, #ffffff, #eef8f1);
+}
+
+.message {
+  max-width: 78%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  margin: 8px 0;
+  line-height: 1.45;
+  font-size: 14px;
+  animation: fadeUp 0.2s ease;
+}
+
+.message.ai {
+  background: #ffffff;
+  border-top-left-radius: 6px;
+  box-shadow: var(--shadow-light);
+}
+
+.message.user {
+  margin-left: auto;
+  background: linear-gradient(135deg, var(--green-700), var(--green-500));
+  color: #fff;
+  border-top-right-radius: 6px;
+  box-shadow: 0 8px 18px rgba(27, 94, 32, 0.35);
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  border-top: 1px solid #e2efe7;
+  background: #fff;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 640px) {
+  .hero h2 {
+    font-size: 28px;
+  }
+
+  .hero-card {
+    padding: 36px 22px;
+  }
+
+  .container,
+  .chat-container {
+    margin: 28px 12px;
+    padding: 24px 18px 26px;
+  }
+}

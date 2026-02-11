@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SmartKisan</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="navbar">
+    <h1 id="titleText">AI Crop Disease Detection</h1>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="upload.html">Upload</a>
+      <select id="languageSelect" onchange="changeLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="ta">தமிழ்</option>
+        <option value="hi">हिन्दी</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2 id="uploadTitle">Upload Crop Image</h2>
+
+    <label id="chooseImage">Choose an image of the crop leaf</label>
+    <input type="file" id="imageInput" />
+<br>
+    <button class="btn" id="analyzeBtn" onclick="analyzeCrop()">
+      Analyze with AI
+    </button>
+
+    <div id="loading" style="display: none;">Analyzing with AI...</div>
+
+    <div id="resultBox" class="result-box" style="display: none;"></div>
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        title: "AI Crop Disease Detection",
+        uploadTitle: "Upload Crop Image",
+        chooseImage: "Choose an image of the crop leaf",
+        analyzeBtn: "Analyze with AI",
+        result:
+          "Detected: Leaf Blight<br/>Advice: Use recommended fungicide and avoid overwatering."
+      },
+      ta: {
+        title: "ஏஐ பயிர் நோய் கண்டறிதல்",
+        uploadTitle: "பயிர் படத்தை பதிவேற்றவும்",
+        chooseImage: "பயிர் இலை படத்தை தேர்ந்தெடுக்கவும்",
+        analyzeBtn: "ஏஐ மூலம் பகுப்பாய்வு",
+        result:
+          "கண்டறியப்பட்டது: இலை கருகல்<br/>ஆலோசனை: பரிந்துரைக்கப்பட்ட பூச்சிக்கொல்லியை பயன்படுத்தவும்."
+      },
+      hi: {
+        title: "एआई फसल रोग पहचान",
+        uploadTitle: "फसल की छवि अपलोड करें",
+        chooseImage: "फसल पत्ती की छवि चुनें",
+        analyzeBtn: "एआई से विश्लेषण करें",
+        result:
+          "पता चला: लीफ ब्लाइट<br/>सलाह: अनुशंसित फफूंदनाशक का उपयोग करें।"
+      }
+    };
+
+    function changeLanguage(lang) {
+      localStorage.setItem("lang", lang);
+      applyLanguage(lang);
+    }
+
+    function applyLanguage(lang) {
+      const t = translations[lang];
+      document.getElementById("titleText").innerText = t.title;
+      document.getElementById("uploadTitle").innerText = t.uploadTitle;
+      document.getElementById("chooseImage").innerText = t.chooseImage;
+      document.getElementById("analyzeBtn").innerText = t.analyzeBtn;
+    }
+
+    function analyzeCrop() {
+      const file = document.getElementById("imageInput").files[0];
+      if (!file) {
+        alert("Please upload an image!");
+        return;
+      }
+
+      const lang = localStorage.getItem("lang") || "en";
+      const t = translations[lang];
+
+      document.getElementById("loading").style.display = "block";
+      document.getElementById("resultBox").style.display = "none";
+
+      setTimeout(() => {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("resultBox").style.display = "block";
+        document.getElementById("resultBox").innerHTML = t.result;
+      }, 1500);
+    }
+
+    const savedLang = localStorage.getItem("lang") || "en";
+    document.getElementById("languageSelect").value = savedLang;
+    applyLanguage(savedLang);
+  </script>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <hr>
+</body>
+</html>

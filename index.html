@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Smart Kisan</title>
+  <link rel="stylesheet" href="style.css" />
+  
+
+</head>
+<body>
+  <div class="navbar">
+    <h1 id="titleText">AI Crop Disease Detection</h1>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="upload.html">Upload</a>
+      <select id="languageSelect" onchange="changeLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="ta">தமிழ்</option>
+        <option value="hi">हिन्दी</option>
+      </select>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="hero-card">
+      <h2 id="homeHeading">Smart AI Support for Farmers</h2>
+      <p id="homeDesc">
+        Upload a crop image and get instant disease detection and guidance in your language.
+      </p>
+      <a href="upload.html" class="btn" id="homeBtn">Start Detection</a>
+    </div>
+  </section>
+
+  <script>
+    const translations = {
+      en: {
+        title: "AI Crop Disease Detection",
+        homeHeading: "Smart AI Support for Farmers",
+        homeDesc:
+          "Upload a crop image and get instant disease detection and guidance in your language.",
+        homeBtn: "Start Detection"
+      },
+      ta: {
+        title: "ஏஐ பயிர் நோய் கண்டறிதல்",
+        homeHeading: "விவசாயிகளுக்கான புத்திசாலி ஏஐ உதவி",
+        homeDesc:
+          "பயிர் படத்தை பதிவேற்றவும் மற்றும் உங்கள் மொழியில் உடனடி வழிகாட்டலை பெறுங்கள்.",
+        homeBtn: "தொடங்குங்கள்"
+      },
+      hi: {
+        title: "एआई फसल रोग पहचान",
+        homeHeading: "किसानों के लिए स्मार्ट एआई सहायता",
+        homeDesc:
+          "फसल की छवि अपलोड करें और अपनी भाषा में तुरंत मार्गदर्शन प्राप्त करें।",
+        homeBtn: "शुरू करें"
+      }
+    };
+
+    function changeLanguage(lang) {
+      localStorage.setItem("lang", lang);
+      applyLanguage(lang);
+    }
+
+    function applyLanguage(lang) {
+      const t = translations[lang];
+      document.getElementById("titleText").innerText = t.title;
+      document.getElementById("homeHeading").innerText = t.homeHeading;
+      document.getElementById("homeDesc").innerText = t.homeDesc;
+      document.getElementById("homeBtn").innerText = t.homeBtn;
+    }
+
+    const savedLang = localStorage.getItem("lang") || "en";
+    document.getElementById("languageSelect").value = savedLang;
+    applyLanguage(savedLang);
+  </script>
+</body>
+</html>
